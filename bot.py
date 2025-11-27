@@ -59,7 +59,7 @@ class ServiceMenu(discord.ui.Select):
             interaction.user: discord.PermissionOverwrite(view_channel=True, send_messages=True)
         }
         safe_name = "".join(c for c in interaction.user.name if c.isalnum())
-        channel = await guild.create_text_channel(f"服務-{safe_name}")
+        channel = await guild.create_text_channel(f"服務-{safe_name}", overwrites=overwrite)
         await channel.send(f"{interaction.user.mention}，感謝你選擇了「{selected_option}」服務，我們將盡快為你提供協助。",
                            view=CloseTicketView()
                           )
