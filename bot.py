@@ -31,8 +31,8 @@ class SetbutView(discord.ui.View):
                 await interaction.response.send_message("你已成功獲取身分組！", ephemeral=True)
             else:
                 await interaction.response.send_message("找不到指定的身分組。", ephemeral=True)
-            button.callback = button_callback
-
+        button.callback = button_callback
+        self.add_item(button)
 @bot.command()
 async def setupbutton(ctx):
     embed = discord.Embed(
