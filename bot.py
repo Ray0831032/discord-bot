@@ -63,6 +63,8 @@ class ServiceMenu(discord.ui.Select):
         await channel.send(f"{interaction.user.mention}，感謝你選擇了「{selected_option}」服務，我們將盡快為你提供協助。",
                            view=CloseTicketView()
                           )
+
+
 class ServiceView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
@@ -72,7 +74,7 @@ class ServiceView(discord.ui.View):
 @bot.command()
 async def services(ctx):
     embed = discord.Embed(
-        title="服務選單",
+        title="**𝙐𝘾𝘾𝙃𝙀𝘼𝙏｜除錯服務**",
         description="請從下拉選單中選擇你需要的服務類型。",
         color=discord.Color.purple()
     )
