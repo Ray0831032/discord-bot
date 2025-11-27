@@ -10,6 +10,14 @@ TOKEN = os.environ["DISCORD_TOKEN"]
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 
+@bot.event
+async def on_ready():
+    print("bot 已啟動（Persistent Views 已註冊）")
+
+    bot.add_view(ServiceView())   # 下拉選單
+    bot.add_view(CloseTicketView())  # 關閉按鈕
+
+
 @bot.command()
 async def setupbutton(ctx):
     embed = discord.Embed(
