@@ -16,7 +16,22 @@ async def on_ready():
 
     bot.add_view(ServiceView())   # 下拉選單
     bot.add_view(CloseTicketView())  # 關閉按鈕
+    bot.add_view(SetbutView())
 
+class SetbutView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+        button = discord.ui.Button(label="獲取身分組", style=discord.ButtonStyle.green, custom_id="get_roles")
+        async def button_callback(interaction):
+            role = discord.utils.get(ctx.guild.roles, name="客戶")
+            unrole = discord.utils.get(ctx.guild.roles, name="未驗證")
+            if role:
+                await interaction.user.add_roles(role)
+                await interaction.user.remove_roles(unrole)
+                await interaction.response.send_message("你已成功獲取身分組！", ephemeral=True)
+            else:
+                await interaction.response.send_message("找不到指定的身分組。", ephemeral=True)
+            button.callback = button_callback
 
 @bot.command()
 async def setupbutton(ctx):
@@ -25,30 +40,7 @@ async def setupbutton(ctx):
         description="請點擊下方按鈕以獲取身分組。",
         color=discord.Color.blue()
     )
-
-    view = discord.ui.View(timeout=None)  # 讓按鈕永久有效
-    button = discord.ui.Button(
-        label="獲取身分組",
-        style=discord.ButtonStyle.green,
-        emoji="🎉",
-        custom_id="getrole_button"        # 每個永久按鈕都必須有 custom_id
-    )
-
-    async def button_callback(interaction):
-        role = discord.utils.get(ctx.guild.roles, name="客戶")
-        unrole = discord.utils.get(ctx.guild.roles, name="未驗證")
-
-        if role:
-            await interaction.user.add_roles(role)
-            await interaction.user.remove_roles(unrole)
-            await interaction.response.send_message("你已成功獲取身分組！", ephemeral=True)
-        else:
-            await interaction.response.send_message("找不到指定的身分組。", ephemeral=True)
-
-    button.callback = button_callback
-    view.add_item(button)
-
-    await ctx.send(embed=embed, view=view)
+    await ctx.send(embed=embed, view=SetbutView())
 
 class ServiceMenu(discord.ui.Select):
     def __init__(self):
@@ -84,7 +76,7 @@ async def services(ctx):
     embed = discord.Embed(
         title="**𝙐𝘾𝘾𝙃𝙀𝘼𝙏｜除錯服務**",
         description="請從下拉選單中選擇你需要的服務類型。",
-        color=discord.Color.purple()
+        color=discord.Color.purple(),
     )
     await ctx.send(embed=embed, view=ServiceView())
 
