@@ -23,8 +23,9 @@ class SetbutView(discord.ui.View):
         super().__init__(timeout=None)
         button = discord.ui.Button(label="獲取身分組", style=discord.ButtonStyle.green, custom_id="get_roles")
         async def button_callback(interaction):
-            role = discord.utils.get(ctx.guild.roles, name="客戶")
-            unrole = discord.utils.get(ctx.guild.roles, name="未驗證")
+            guild = interaction.guild
+            role = discord.utils.get(guild.roles, name="客戶")
+            unrole = discord.utils.get(guild.roles, name="未驗證")
             if role:
                 await interaction.user.add_roles(role)
                 await interaction.user.remove_roles(unrole)
@@ -50,7 +51,7 @@ class ServiceMenu(discord.ui.Select):
             discord.SelectOption(label="成為夥伴", description="想與我們一起合作", emoji="🤝"),
             discord.SelectOption(label="沒收到貨", description="索取帳號/未收到商品", emoji="📦"),
         ]
-        super().__init__(placeholder="選擇一個服務選項...", max_values=1, options=options)
+        super().__init__(placeholder="選擇一個服務選項...", max_values=1, options=options, custom_id="menu")
     async def callback(self, interaction: discord.Interaction):
         selected_option = self.values[0]
         guild = interaction.guild
