@@ -24,7 +24,7 @@ class SetbutView(discord.ui.View):
         button = discord.ui.Button(label="獲取身分組", style=discord.ButtonStyle.green, custom_id="get_roles")
         async def button_callback(interaction):
             guild = interaction.guild
-            role = discord.utils.get(guild.roles, name="客戶")
+            role = discord.utils.get(guild.roles, name="客戶") or discord.utils.get(guild.roles, name="玩家")
             unrole = discord.utils.get(guild.roles, name="未驗證")
             if role:
                 await interaction.user.add_roles(role)
