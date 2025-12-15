@@ -8,12 +8,11 @@ intents.members = True
 intents.message_content = True
 TOKEN = os.environ["DISCORD_TOKEN"]
 bot = commands.Bot(command_prefix="!", intents=intents)
-
+ROLE = 1446919487931547698
 @bot.event
 async def welcome(member):
-    rolee = discord.utils.get(member.guild.roles, name="未驗證")
-    if role:
-        await member.add_roles(rolee)
+    rolee = discord.utils.get(ROLE)
+    await member.add_roles(ROLE)
 @bot.event
 async def on_ready():
     print("bot 已啟動（Persistent Views 已註冊）")
