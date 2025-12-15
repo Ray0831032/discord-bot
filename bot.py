@@ -80,8 +80,8 @@ class ServiceView(discord.ui.View):
 @bot.command()
 async def services(ctx):
     embed = discord.Embed(
-        title="**𝙐𝘾𝘾𝙃𝙀𝘼𝙏｜除錯服務**",
-        description="請從下拉選單中選擇你需要的服務類型。",
+        title="**📩  UCHEAT | 除錯服務**",
+        description="【:uc:開客服單須知】",
         color=discord.Color.purple(),
     )
     await ctx.send(embed=embed, view=ServiceView())
