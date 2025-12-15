@@ -11,6 +11,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 @bot.event
 async def on_member_join(member):
+    await asyncio.sleep(3)
     role = discord.utils.get(member.guild.roles, name="未驗證")
     if role:
         await member.add_roles(role)
