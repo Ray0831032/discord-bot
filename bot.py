@@ -85,6 +85,9 @@ async def services(ctx):
         "**📩 UCHEAT | 解機服務**\n\n 【**<:uc:1442544293460836544>遠端解機**】\n\n- **單次收費:[人工服務](https://uc666.xyz/product/anydeskforu/)**\n\n 【**<:uc:1442544293460836544>自備服務**】\n\n- **需自備:[解機碼卡號](https://uc666.xyz/product-category/hwid-spoofer/)**\n\n- **[ USB隨身碟 - 至少8GB空間 ]**\n\n【**<:uc:1442544293460836544>遠端程序**】\n\n- **下載連結:[連連控遠端](https://www.asklink.com/zh-tw)**\n\n- **服務時間 : 18:00～23:00**",
         color=discord.Color.yellow(),
     )
+    embed.set_thumbnail(
+        url="https://cdn.discordapp.com/attachments/1142488059326238750/1450142677671870555/UC-4.webp?ex=6941761c&is=6940249c&hm=21cf7885ce126c46cc8d9c0f9857d08406efe3497d1d44507c4af832fb889093&"
+    )
     await ctx.send(embed=embed, view=ServiceView())
 
 class CloseTicketView(discord.ui.View):
