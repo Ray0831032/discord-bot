@@ -8,6 +8,8 @@ intents.members = True
 intents.message_content = True
 TOKEN = os.environ["DISCORD_TOKEN"]
 bot = commands.Bot(command_prefix="!", intents=intents)
+old_roleid = 1415861570235535454
+new_roleid = 1415323799951380621
 
 @bot.event
 async def on_member_join(member):
@@ -115,6 +117,22 @@ async def closeticket(ctx):
         color=discord.Color.red()
     )
     await ctx.send(embed=embed, view=CloseTicketView())
+@bot.command()
+async def replace_role(ctx):
+    guild = ctx.guild 
+    old_role = guild.get_role(old_roleid)
+    new_role = guild.get_role(new_roleid)
+    if not old_role or not new_role:
+        await ctx.send("Not Found")
+        return
     
+    for member in guild.members:
+        try:
+            await asyncio.sleep(0.1)
+            await member.remove_roles(old_role)
+            await asyncio.sleep(0.1)
+            await member.add_roles(new_role)
+        except Exception as e:
+            print(f"{member}failed:{e}")
 
 bot.run(TOKEN)
